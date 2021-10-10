@@ -2,18 +2,34 @@ package unit;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import units.Product;
 import units.Store;
 
 public class StoreTest {
-    @Test
-    public void addingProductWithValidQuantitySucceeds(){
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 3, 5, -3, 15, Integer.MAX_VALUE}) //Parameters
+    public void addingProductWithValidQuantitySucceeds(int quantity){
         //Arrange
         Store sut = new Store(); //SUT(System Under Test)
         //Act
-        sut.addInventory(Product.BREAD, 1);
+        sut.addInventory(Product.BREAD, quantity);
         //Assert
-        Assertions.assertEquals(1, sut.getInventory(Product.BREAD), "units.Product inventory is incorrect!");
+        Assertions.assertEquals(quantity, sut.getInventory(Product.BREAD), "units.Product inventory is incorrect!");
+    }
+
+    @ParameterizedTest
+    @EnumSource(Product.class) //Passing all products from the product list
+    public void addingValidProductSucceeds(Product product){
+        //Arrange
+        Store sut = new Store(); //SUT(System Under Test)
+        //Act
+        sut.addInventory(product, 1);
+        //Assert
+        Assertions.assertEquals(1, sut.getInventory(product), "units.Product inventory is incorrect!");
     }
 
     @Test
