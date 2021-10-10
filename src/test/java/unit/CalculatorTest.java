@@ -1,8 +1,17 @@
+package unit;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import units.Calculator;
 
 public class CalculatorTest {
+    private Calculator calculator = null;
+
+
+    public void beforeEach() {
+        calculator = new Calculator(); //Arrange part can be simplified by adding before each test
+    }
 
     @Test
     @DisplayName("Can sum numbers")

@@ -1,17 +1,28 @@
+package unit;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import units.Customer;
+import units.Product;
+import units.Store;
 
 public class CustomerTest {
     private Store store = null;
     private Customer sut = null;
 
+    @BeforeEach
+    public void beforeEachTest(){
+        //Arrange
+        store = new Store();
+        sut = new Customer();
+    }
+
     @Test
     @DisplayName("Purchase succeeds if inventory is more than purchased qty")
     public void purchaseSucceedsIfInventoryIsMoreThanQty(){
         //Arrange
-        store = new Store();
-        sut = new Customer();
         store.addInventory(Product.BEER, 10);
         //Act
         sut.purchase(store, Product.BEER, 5);
@@ -23,8 +34,6 @@ public class CustomerTest {
     @DisplayName("Purchase succeeds if inventory is equal to quantity")
     public void purchaseSucceedsWhenInventoryIsEqualToQuantity(){
         //Arrange
-        store = new Store();
-        sut = new Customer();
         store.addInventory(Product.SHAMPOO, 10);
         //Act
         boolean result = sut.purchase(store, Product.SHAMPOO, 10);
@@ -33,14 +42,12 @@ public class CustomerTest {
     }
 
     @Test
-    @DisplayName("Purchase fails if inventory is less than quantity")
-    public void purchaseFailsIfInventoryIsLessThanQuantity(){
+    @DisplayName("Purchase fails if inventory is not enough")
+    public void purchaseFailsIfInventoryIsNotEnough(){
         //Arrange
-        store = new Store();
-        sut = new Customer();
-        store.addInventory(Product.SHAMPOO, 10);
+        store.addInventory(Product.CUCUMBER, 10);
         //Act
-        boolean result = sut.purchase(store, Product.SHAMPOO, 20);
+        boolean result = sut.purchase(store, Product.CUCUMBER, 20);
         //Assert
        Assertions.assertEquals(false, result);
     }
@@ -48,9 +55,6 @@ public class CustomerTest {
     @Test
     @DisplayName("Purchase fails when product not available")
     public void purchaseFailsIfProductNotAvailable(){
-        //Arrange
-        store = new Store(); //The store if fixture. Something with fixed state
-        sut = new Customer();
         //Act
         boolean result = sut.purchase(store, Product.SHAMPOO, 20);
         //Assert
