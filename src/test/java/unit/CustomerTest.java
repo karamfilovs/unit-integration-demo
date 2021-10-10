@@ -38,7 +38,7 @@ public class CustomerTest {
         //Act
         boolean result = sut.purchase(store, Product.SHAMPOO, 10);
         //Assert
-        Assertions.assertEquals(true, result);
+        Assertions.assertTrue(result);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class CustomerTest {
         //Act
         boolean result = sut.purchase(store, Product.CUCUMBER, 20);
         //Assert
-       Assertions.assertEquals(false, result);
+        Assertions.assertFalse(result);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class CustomerTest {
         //Act
         boolean result = sut.purchase(store, Product.SHAMPOO, 20);
         //Assert
-        Assertions.assertEquals(false, result);
+        Assertions.assertFalse(result);
     }
 
 

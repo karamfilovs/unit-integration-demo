@@ -1,23 +1,25 @@
 package unit;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import units.Calculator;
 
 public class CalculatorTest {
-    private Calculator calculator = null;
+    private Calculator sut = null;
 
 
+    @BeforeEach
     public void beforeEach() {
-        calculator = new Calculator(); //Arrange part can be simplified by adding before each test
+        sut = new Calculator();
     }
 
     @Test
     @DisplayName("Can sum numbers")
     public void canSumNumbers() {
         //Arrange
-        Calculator sut = new Calculator();
+        //Calculator sut = new Calculator();
         //Act
         double result = sut.sum(10, 20);
         //Assert
@@ -28,7 +30,7 @@ public class CalculatorTest {
     @DisplayName("Can divide numbers")
     public void canDivideDigits() {
         //Arrange
-        Calculator sut = new Calculator();
+       // Calculator sut = new Calculator();
         //Act
         double result = sut.divide(10, 5);
         //Assert
@@ -39,7 +41,7 @@ public class CalculatorTest {
     @DisplayName("Dividing floating values by zero returns positive infinity")
     public void divisionByZeroReturnsInfinity() {
         //Arrange
-        Calculator sut = new Calculator();
+       // Calculator sut = new Calculator();
         //Act
         double result = sut.divide(10, 0);
         //Assert

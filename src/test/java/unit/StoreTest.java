@@ -35,7 +35,7 @@ public class StoreTest {
         boolean success = sut.removeInventory(Product.BREAD, 2);
         //Assert
         Assertions.assertEquals(3, sut.getInventory(Product.BREAD));
-        Assertions.assertEquals(true, success);
+        Assertions.assertTrue(success);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class StoreTest {
         sut.addInventory(Product.APPLES, 10);
         //Act
         boolean success = sut.removeInventory(Product.APPLES, 20);
-        Assertions.assertEquals(false, success);
+        Assertions.assertFalse(success);
     }
 
 
